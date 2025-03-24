@@ -43,8 +43,7 @@ namespace ApiEmpleadosMultiplesRutas.Controllers
             return await this.repo.GetEmpleadosOficiosAsync(oficio);
         }
 
-        //SI TENEMOS MAS DE UN PARAMETRO DENTRO DE UN CONTROLLER DEBEMOS MAPEAR
-        //LOS DATOS EN EL MISMO ORDEN DEL METODO
+        //SI TENEMOS MAS DE UN PARAMETRO DENTRO DE UN CONTROLLER DEBEMOS MAPEAR LOS DATOS EN EL MISMO ORDEN DEL METODO
         [HttpGet]
         [Route("[action]/{salario}/{iddepartamento}")]
         public async Task<ActionResult<List<Empleado>>> EmpleadosSalarioDepartamentoAsync(int salario, int iddepartamento)
