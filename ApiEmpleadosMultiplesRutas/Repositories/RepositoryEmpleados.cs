@@ -1,5 +1,5 @@
 ﻿using ApiEmpleadosMultiplesRutas.Data;
-using ApiEmpleadosMultiplesRutas.Models;
+using NugetApiModelsCPC;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiEmpleadosMultiplesRutas.Repositories
@@ -23,12 +23,9 @@ namespace ApiEmpleadosMultiplesRutas.Repositories
             return await this.context.Empleados.FirstOrDefaultAsync(z => z.IdEmpleado == idEmpleado);
         }
 
-        public async Task<List<Empleado>> GetEmpleadosOficiosAsync(string oficio)
+        public async Task<List<Empleado>> GetEmpleadosOficioAsync(string oficio)
         {
-            var consulta = from datos in this.context.Empleados
-                           where oficio.Contains(datos.Oficio)
-                           select datos;
-            return await consulta.ToListAsync();
+            return await this.context.Empleados.Where(z => z.Oficio == oficio).ToListAsync();
         }
 
         public async Task<List<Empleado>> GetEmpleadosSalarioAsync(int salario, int idDepartamento)
@@ -38,8 +35,7 @@ namespace ApiEmpleadosMultiplesRutas.Repositories
 
         public async Task<List<string>> GetOficiosAsync()
         {
-            var consulta = (from datos in this.context.Empleados
-                            select datos.Oficio).Distinct();
+            var consulta = (from datos in this.context.Empleados select datos.Oficio).Distinct();
             return await consulta.ToListAsync();
         }
     }
